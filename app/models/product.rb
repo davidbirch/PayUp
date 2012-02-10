@@ -1,5 +1,11 @@
 class Product < ActiveRecord::Base
   
+  # a product can be part of many line items
+  has_many :line_items
+  
+  # cannot destroy a product if line items exist
+  before_destroy :ensure_not_referenced_by_any_line_item
+  
   # validate these mandatory fields
   validates :title, :description, :image_url, presence: true
   
@@ -11,9 +17,22 @@ class Product < ActiveRecord::Base
   
   # validate the image refers to a url
   validates :image_url, allow_blank: true, format: {
-  	with: %r{\.(gif|jpg|png)$}i,
-  	message: 'must be a URL for GIF, JPG or PNG image.'
-  	}
+    with: %r{\.(gif|jpg|png)$}i,
+    message: 'must be a URL for GIF, JPG or PNG image.'
+    }
+  
+  private
+    
+    # ensure that there are no line items referencing this product
+
+    def ensure_not_referenced_by_any_line_item
+      if line_items.empty?
+        return true
+      else
+        errors.add(:base, 'Line Items present')
+        return false
+      end
+    end
   
   
 end
