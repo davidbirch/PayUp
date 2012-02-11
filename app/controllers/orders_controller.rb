@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,6 +31,7 @@ class OrdersController < ApplicationController
     end
     
     @order = Order.new
+    @disable_checkout_button = true
 
     respond_to do |format|
       format.html # new.html.erb

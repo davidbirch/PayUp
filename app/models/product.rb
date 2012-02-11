@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   
   # a product can be part of many line items
   has_many :line_items
+  has_many :orders, through: :line_items
   
   # cannot destroy a product if line items exist
   before_destroy :ensure_not_referenced_by_any_line_item

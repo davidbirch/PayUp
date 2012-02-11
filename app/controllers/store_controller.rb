@@ -8,11 +8,11 @@ class StoreController < ApplicationController
     
     session[:name] = "David"
     session[:day] = Date.today
-    session[:time] = Time.now
-    
-    
+    session[:time] = Time.now  
   end
   
+  
+    
   private
   
     def increment_count
