@@ -1,4 +1,3 @@
-
 # this is an adaption of the Active Merchant library for eWay Merchant Hosted Payment solution
 # http://rubydoc.info/github/Shopify/active_merchant/master/ActiveMerchant/Billing/EwayGateway
 # http://www.eway.com.au/Developer/eway-api/hosted-payment-solution.aspx
@@ -13,7 +12,7 @@ ActiveMerchant::Billing::Base.mode = :test
 # note: use 87654321 if you don't have an eWay sandbox account, otherwise use your sandbox account id
 # you can find this by logging into the partner portal -> resources -> sandbox/testing
 gateway = ActiveMerchant::Billing::EwayGateway.new(
-:login => '87654321'
+:login => '91705068'
 )
 
 # set the value of the transaction in AUD cents
@@ -44,12 +43,9 @@ credit_card = ActiveMerchant::Billing::CreditCard.new(
 options = {
     :order_id => '123',
     :billing_address => {
-      :address1 => '10 Smith Street',
-      :city => 'Collingwood',
-      :state => 'VIC',
-      :country => 'AU',
-      :zip => '3066'
-      },
+      :address1 => '',
+      :zip => ''
+      }
 }
 
 #validate the credit card and transact
