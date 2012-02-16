@@ -1,1 +1,4 @@
 database.yml
+environments/development.rb
+environments/test.rb
+environments/production.rb

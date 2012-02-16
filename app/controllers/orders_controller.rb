@@ -49,13 +49,18 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.add_line_items_from_cart(current_cart)
-    
+        
     respond_to do |format|
       if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
-        format.html { redirect_to store_url, notice:'Thank you for your order.' }
-        format.json { render json: @order, status: :created, location: @order }
+        if @order.purchase
+          Cart.destroy(session[:cart_id])
+          session[:cart_id] = nil
+          format.html { redirect_to store_url, notice:'Thank you for your order.' }
+          format.json { render json: @order, status: :created, location: @order } 
+        else
+          format.html { redirect_to store_url, notice:'The order failed.' }
+        end
+        
       else
         @cart = current_cart
         format.html { render action: "new" }

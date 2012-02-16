@@ -11,23 +11,56 @@
     </div>
   <% end %>
 
+  <p class="summary"> The bag of fruit will cost <%= number_to_currency(@cart.total_price) %> </p>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, size: 40 %>
+    <input id="order_total_price" type="hidden" value=<%= @cart.total_price %> name="order[total_price]"/>
+   </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_area :address, rows: 3, cols: 40 %>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, size: 40 %>
+    <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :pay_type %><br />
-    <%= f.select :pay_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method' %>
+    <%= f.label :address1 %><br />
+    <%= f.text_field :address1 %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </div>
+  <div class="field">
+    <%= f.label :zip %><br />
+    <%= f.text_field :zip %>
+  </div>
+  <div class="field">
+    <%= f.label :card_expires_on %><br />
+    <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true %>
+  </div>
+  <div class="field">
+    <%= f.label :card_number %><br />
+    <%= f.text_field :card_number %>
+  </div>
+  <div class="field">
+    <%= f.label :card_verification %><br />
+    <%= f.text_field :card_verification %>
   </div>
   <div class="actions">
     <%= f.submit 'Place Order' %>
   </div>
+  
 <% end %>
